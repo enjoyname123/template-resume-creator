@@ -1,5 +1,5 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ResumeData } from '@/types/resume';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
