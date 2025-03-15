@@ -135,9 +135,13 @@ export function ResumePreview({ data, template, className }: ResumePreviewProps)
     }
   }, [data, hasPersonalInfo, saveToLocalStorage]);
 
-  // Add console log to debug the template
+  // Add console logs to debug the template rendering
   console.log("Resume template to render:", template);
   console.log("Resume data:", data);
+  
+  // Extra debug info to see if the template is valid React element
+  console.log("Is template valid?", template ? "Yes" : "No");
+  console.log("Template type:", template ? typeof template : "undefined");
 
   return (
     <div className={cn("flex flex-col", className)}>
@@ -204,7 +208,14 @@ export function ResumePreview({ data, template, className }: ResumePreviewProps)
             maxHeight: '100%',
           }}
         >
-          {template ? template : <div className="p-8 text-center text-gray-500">No template selected</div>}
+          {template ? (
+            template
+          ) : (
+            <div className="p-8 text-center text-gray-500">
+              <p>No template selected</p>
+              <p className="mt-2 text-sm">Please make sure a valid template ID is provided</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

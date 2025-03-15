@@ -32,6 +32,7 @@ export const getTemplateById = (
   id: string,
   data: ResumeData
 ): React.ReactNode => {
+  console.log(`Attempting to get template with id: "${id}"`);
   const template = resumeTemplates.find(t => t.id === id);
   
   if (!template) {

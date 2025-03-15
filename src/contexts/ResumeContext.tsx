@@ -466,6 +466,7 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     try {
       localStorage.setItem('resumeData', JSON.stringify(resumeData));
       localStorage.setItem('resumeTheme', theme);
+      console.log('Saved resume to localStorage. Current theme:', theme);
       toast.success('Resume saved successfully');
       return true;
     } catch (error) {
@@ -480,12 +481,17 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       const savedResumeData = localStorage.getItem('resumeData');
       const savedTheme = localStorage.getItem('resumeTheme');
       
+      console.log('Loading from localStorage. Found theme:', savedTheme);
+      
       if (savedResumeData) {
         setResumeData(JSON.parse(savedResumeData));
       }
       
       if (savedTheme && ['minimal', 'professional', 'creative', 'executive', 'modern'].includes(savedTheme)) {
         setTheme(savedTheme as ResumeTheme);
+        console.log('Theme set to:', savedTheme);
+      } else {
+        console.log('Using default theme: minimal');
       }
       
       if (savedResumeData || savedTheme) {
@@ -507,8 +513,17 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   };
 
   useEffect(() => {
-    loadFromLocalStorage();
+    console.log('ResumeProvider mounted, attempting to load data');
+    const loaded = loadFromLocalStorage();
+    if (!loaded) {
+      console.log('No saved data found, using default data');
+    }
   }, []);
+
+  // Log whenever theme changes
+  useEffect(() => {
+    console.log('Current theme:', theme);
+  }, [theme]);
 
   return (
     <ResumeContext.Provider
