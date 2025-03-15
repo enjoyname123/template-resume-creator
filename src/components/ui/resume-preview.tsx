@@ -135,6 +135,10 @@ export function ResumePreview({ data, template, className }: ResumePreviewProps)
     }
   }, [data, hasPersonalInfo, saveToLocalStorage]);
 
+  // Add console log to debug the template
+  console.log("Resume template to render:", template);
+  console.log("Resume data:", data);
+
   return (
     <div className={cn("flex flex-col", className)}>
       <div className="flex items-center justify-between mb-4 px-4">
@@ -200,7 +204,7 @@ export function ResumePreview({ data, template, className }: ResumePreviewProps)
             maxHeight: '100%',
           }}
         >
-          {template}
+          {template ? template : <div className="p-8 text-center text-gray-500">No template selected</div>}
         </div>
       </div>
     </div>

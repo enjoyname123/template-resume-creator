@@ -35,11 +35,13 @@ export const getTemplateById = (
   const template = resumeTemplates.find(t => t.id === id);
   
   if (!template) {
+    console.warn(`Template with id "${id}" not found, defaulting to minimal`);
     // Default to minimal template if not found
     const MinimalComponent = resumeTemplates[0].component;
     return <MinimalComponent data={data} />;
   }
   
+  console.log(`Rendering template: ${template.name}`);
   const TemplateComponent = template.component;
   return <TemplateComponent data={data} />;
 };
