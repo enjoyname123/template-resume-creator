@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { ResumeData } from '@/types/resume';
 import { cn } from '@/lib/utils';
@@ -135,11 +134,9 @@ export function ResumePreview({ data, template, className }: ResumePreviewProps)
     }
   }, [data, hasPersonalInfo, saveToLocalStorage]);
 
-  // Add console logs to debug the template rendering
+  // Debug logs
   console.log("Resume template to render:", template);
   console.log("Resume data:", data);
-  
-  // Extra debug info to see if the template is valid React element
   console.log("Is template valid?", template ? "Yes" : "No");
   console.log("Template type:", template ? typeof template : "undefined");
 

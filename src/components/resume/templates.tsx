@@ -33,6 +33,14 @@ export const getTemplateById = (
   data: ResumeData
 ): React.ReactNode => {
   console.log(`Attempting to get template with id: "${id}"`);
+  
+  // Add default theme handling if id is empty
+  if (!id) {
+    console.warn('No template ID provided, defaulting to minimal');
+    const MinimalComponent = resumeTemplates[0].component;
+    return <MinimalComponent data={data} />;
+  }
+  
   const template = resumeTemplates.find(t => t.id === id);
   
   if (!template) {
